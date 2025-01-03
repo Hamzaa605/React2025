@@ -6,7 +6,18 @@ function DisplayName() {
     let [lenght, setLenght] = useState(5)
     let [breadth, setBreadth] = useState(2)
     let [area, setArea] = useState(lenght * breadth)
-    useEffect(()=>{setArea(lenght*breadth)},[lenght,breadth])
+    useEffect(() => {
+        let value=setTimeout(() => {
+            setArea(lenght * breadth);
+        }, 5000)
+
+        //Cleanup Function
+        return()=>{
+            console.log("Cleanup Function")
+            clearTimeout(value);
+        }
+
+    }, [lenght, breadth])
     return (
         <div>
             <input type="text" value={name}
