@@ -6,6 +6,7 @@ import About from './components/About';
 import Contant from './components/Contant';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import Courses from './components/Courses';
 
 
 const router = createBrowserRouter([
@@ -21,11 +22,13 @@ const router = createBrowserRouter([
   },
   {
 
-    path: "/contact",
+    path: "/contact/:id",
     element:  <>
     <Navbar />
     <Contant/>
     <Footer />
+
+
     </>
 
 
@@ -36,6 +39,16 @@ const router = createBrowserRouter([
       <Navbar />
       <Footer />
     </>
+  },
+  {
+
+    path: "/courses",
+    element: <>
+    <Navbar />
+    <Courses/>
+    <Footer />
+    </>
+
   },
 
   {
