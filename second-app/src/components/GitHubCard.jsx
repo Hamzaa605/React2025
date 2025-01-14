@@ -5,6 +5,12 @@ function GitHubCard() {
 
     let [githubData, setGitHubData] = useState({});
     let [repositories, setRepositories] = useState([]);
+    let [searchQuery, setSearchQuery] = useState("")
+
+    const handleChange = (event) => {
+        setSearchQuery(event.target.value)
+    }
+
     useEffect(() => {
 
         fetch("https://api.github.com/users/Hamzaa605")
@@ -36,6 +42,12 @@ function GitHubCard() {
                 </div>
             </div>
 
+            {/* Search start*/}
+
+            <input type="text" onChange={ handleChange} />
+
+            {/* Search end */}
+
             {/*Repositories start */}
 
             <table className="table">
@@ -47,17 +59,21 @@ function GitHubCard() {
                     </tr>
                 </thead>
                 <tbody>
-                    {repositories.map((repoObj) => {
+                    {repositories.filter((repoObj) => {
+                        return repoObj.name.toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                    })
+                        .map((repoObj) => {
 
-                       return(<tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+                            return (<tr>
+                                <th scope="row">{repoObj.name}</th>
+                                <td><a href={repoObj.html_url}>Click here to visit repo</a></td>
 
-                    </tr>)
+                            </tr>)
 
-                    })}
+                        })}
 
-                    
+
 
                 </tbody>
             </table>
